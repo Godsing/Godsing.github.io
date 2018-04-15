@@ -53,16 +53,16 @@
 <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo-64.png?v=5.1.3">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32.png?v=5.1.3">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16.png?v=5.1.3">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+  <link rel="mask-icon" href="/images/logo-32.png?v=5.1.3" color="#222">
 
 
 
@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/84531209.jpg">
 <meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/53938885.jpg">
 <meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/62362422.jpg">
-<meta property="og:updated_time" content="2018-04-13T14:35:16.679Z">
+<meta property="og:updated_time" content="2018-04-15T09:17:18.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下shadowsocks各种代理方式总结">
 <meta name="twitter:description" content="前言本文算是一篇总结，把使用 shadowsocks无GUI客户端 的各种常见的代理方式梳理一遍，给有需要的人，避免走同样的弯路。以下是本文的预备条件：  Ubuntu 16.04 系统  可以上网（罗嗦…）  已有 shadowsocks 帐号。获取免费帐号/自行搭建shadowsocks服务端 可以参考：  寻找Shadowsocks账号/搭建Shadowsocks服务 『原创』Shadows">
@@ -156,7 +156,7 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
@@ -304,7 +304,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-15T17:17:18+08:00">
+                2018-04-15
+              </time>
             
           </span>
 
@@ -312,13 +324,65 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/13/Linux下shadowsocks各种代理方式总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/13/Linux下shadowsocks各种代理方式总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
           
+             <span id="/2018/04/13/Linux下shadowsocks各种代理方式总结/" class="leancloud_visitors" data-flag-title="Linux下shadowsocks各种代理方式总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,613 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14 分钟
+                </span>
+              
+            </div>
           
 
           
@@ -361,13 +425,13 @@
 <li>果然发现 pip 可以单独<a href="#pip 使用代理">配置代理</a>。至此，目标达到了，pip 下载包终于可以达到 1MB/s 以上。然而半天时间过去了，多么痛的领悟！</li>
 </ol>
 <h2 id="让shadowsocks跑起来"><a href="#让shadowsocks跑起来" class="headerlink" title="让shadowsocks跑起来"></a>让shadowsocks跑起来</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><strong>Debian/Ubuntu:</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python-pip  # 已经安装了pip的话跳过</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python-pip  <span class="comment"># 已经安装了pip的话跳过</span></span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
 <p><strong>CentOS:</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install python-setuptools &amp;&amp; easy_install pip</span><br><span class="line">sudo pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install python-setuptools &amp;&amp; easy_install pip</span><br><span class="line">sudo pip install shadowsocks</span><br></pre></td></tr></table></figure>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>找个地方放shadowsocks的配置文件，一般放到 <code>/etc</code>下面：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/shadowsocks.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/shadowsocks.json</span><br></pre></td></tr></table></figure>
 <p>比如我放在用户目录下，因为有时需要修改，放在这里方便些：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /home/your-username/shadowsocks.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /home/your-username/shadowsocks.json</span><br></pre></td></tr></table></figure>
 <p>你可以根据自身情况考虑，文件名和路径都可以随意设置，只要自己能记住就行。</p>
 <p>然后在<code>shadowsocks.json</code>里面添加配置信息，如：（注意双引号）</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"server"</span>:<span class="string">"your_server_ip"</span>,</span><br><span class="line">  <span class="attr">"local_address"</span>: <span class="string">"127.0.0.2"</span>,</span><br><span class="line">  <span class="attr">"local_port"</span>:<span class="number">1080</span>,</span><br><span class="line">  <span class="attr">"server_port"</span>:your_server_port,</span><br><span class="line">  <span class="attr">"password"</span>:<span class="string">"your_server_password"</span>,</span><br><span class="line">  <span class="attr">"timeout"</span>:<span class="number">600</span>,</span><br><span class="line">  <span class="attr">"method"</span>:<span class="string">"aes-128-ctr"</span>,</span><br><span class="line">  <span class="attr">"fast_open"</span>:<span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -437,7 +501,7 @@
 </ul>
 <h3 id="开机自启"><a href="#开机自启" class="headerlink" title="开机自启"></a>开机自启</h3><p>以下使用Systemd来实现shadowsocks开机自启。</p>
 <p>先检查一下<code>sslocal</code> 的具体目录，然后配置文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> where sslocal</span><br><span class="line">/usr/local/bin/sslocal</span><br><span class="line"><span class="meta">$</span> sudo vim /etc/systemd/system/shadowsocks.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">where</span> sslocal</span><br><span class="line">/usr/<span class="built_in">local</span>/bin/sslocal</span><br><span class="line">$ sudo vim /etc/systemd/system/shadowsocks.service</span><br></pre></td></tr></table></figure>
 <p>在里面填写如下内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Shadowsocks Client Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/local/sslocal -c /home/your-username/shadowsocks.json</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
 <p>把 <code>/usr/bin/local/sslocal</code> 修改为你的 <code>sslocal</code> 所在路径，如 <code>/usr/bin/sslocal</code> </p>
@@ -447,7 +511,7 @@
 <p>小知识：如果发现粘贴不了，那是因为只有vim.gtk或vim.gnome才能使用系统全局粘贴板，默认的vim.basic看不到<code>+</code>号寄存器。安装vim.gnome使用<code>apt-get install vim-gnome</code>，然后vim自动会链接到vim.gnome。</p>
 </blockquote>
 <p>配置生效：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable /etc/systemd/system/shadowsocks.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> /etc/systemd/system/shadowsocks.service</span><br></pre></td></tr></table></figure>
 <p>输入管理员密码就可以了。</p>
 <p>现在你可以马上重启试试，或先在后台启动，等下次重启再看看！</p>
 <hr>
@@ -475,7 +539,7 @@
 <li><p><code>Rule List Format</code>选择<code>AutoProxy</code></p>
 </li>
 <li><p>下面的<code>Rule List URL</code>填写<code>gfwlist</code>地址:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>下载规则文件，点击<code>Download Profile Now</code></p>
 </li>
@@ -494,62 +558,62 @@
 <hr>
 <p>这样设置后，浏览器一般可以正常科学上网了，因为浏览器基本上都能完美支持http代理和socks代理。然而终端里执行的程序基本上都不能友好的支持socks代理，在终端要使用socks代理，常见的有两种方法：使用 polipo 或 proxychains，以下分别介绍。</p>
 <h2 id="终端代理"><a href="#终端代理" class="headerlink" title="终端代理"></a>终端代理</h2><h3 id="方法一：proxychains"><a href="#方法一：proxychains" class="headerlink" title="方法一：proxychains"></a>方法一：proxychains</h3><p>Tips: 使用 proxychains 不需要开启系统代理，只要启动着 shadowsocks 就可以了。</p>
-<h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install proxychains   # 安装 proxychains</span><br></pre></td></tr></table></figure>
-<h4 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 777 /etc/proxychains.conf # 原始权限不足，需要修改权限</span><br><span class="line">vim /etc/proxychains.conf</span><br><span class="line">sudo chmod 644 /etc/proxychains.conf # 保存好配置后，权限修改回去</span><br></pre></td></tr></table></figure>
+<h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install proxychains   <span class="comment"># 安装 proxychains</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 777 /etc/proxychains.conf <span class="comment"># 原始权限不足，需要修改权限</span></span><br><span class="line">vim /etc/proxychains.conf</span><br><span class="line">sudo chmod 644 /etc/proxychains.conf <span class="comment"># 保存好配置后，权限修改回去</span></span><br></pre></td></tr></table></figure>
 <p>编辑配置文件时，将最下面类似 <code>socks4 127.0.0.1 9050</code> 的一行注释掉，添加一行 <code>socks5 127.0.0.2 1080</code> 这里的IP地址和端口就是上面刚刚设置的系统代理的 <code>Socks Host</code> 和端口。</p>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains curl www.google.com</span><br></pre></td></tr></table></figure>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains curl www.google.com</span><br></pre></td></tr></table></figure>
 <h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>在正常使用的命令行前面，加上 <code>proxychains</code>（如上面测试的命令）， 该命令就会使用代理。</p>
-<p>也可以通过输入<code>proxychains bash</code>建立一个新的shell，基于这个shell运行的所有命令都将使用代理。</p>
+<p>也可以通过输入<code>proxychains bash</code>建立一个新的bash，基于这个bash运行的所有命令都将使用代理。</p>
 <h3 id="方法二：polipo"><a href="#方法二：polipo" class="headerlink" title="方法二：polipo"></a>方法二：polipo</h3><p>Tips: 该部分以 http_proxy 为例，socks5 是否可行未知，可自行google。</p>
-<h4 id="安装polipo"><a href="#安装polipo" class="headerlink" title="安装polipo"></a>安装polipo</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo apt-get install polipo</span><br></pre></td></tr></table></figure>
+<h4 id="安装polipo"><a href="#安装polipo" class="headerlink" title="安装polipo"></a>安装polipo</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install polipo</span><br></pre></td></tr></table></figure>
 <h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>config文件是只读的，要想修改里面的数据，需要获得最高权限。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd /etc/polipo/</span><br><span class="line"><span class="meta">$</span> sudo chmod 777 config # 为config文件申请最高权限</span><br><span class="line"><span class="meta">$</span> vi /etc/polipo/config # 打开进行编辑</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/polipo/</span><br><span class="line">$ sudo chmod 777 config <span class="comment"># 为config文件申请最高权限</span></span><br><span class="line">$ vim /etc/polipo/config <span class="comment"># 打开进行编辑</span></span><br></pre></td></tr></table></figure>
 <p>原文件中已经有了两句话，那么需要新加入3句话：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">socksParentProxy = "localhost:1080"</span><br><span class="line">socksProxyType = socks5</span><br><span class="line">logLevel=4</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">socksParentProxy = <span class="string">"localhost:1080"</span></span><br><span class="line">socksProxyType = socks5</span><br><span class="line">logLevel=4</span><br></pre></td></tr></table></figure>
 <p>ps：这里建议修改文件后恢复其本来的权限，这算是个好习惯。</p>
 <h4 id="关闭和启动polipo"><a href="#关闭和启动polipo" class="headerlink" title="关闭和启动polipo"></a>关闭和启动polipo</h4><p>关闭软件，让配置生效，然后重启。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo service polipo stop</span><br><span class="line"><span class="meta">$</span> sudo service polipo start</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service polipo stop</span><br><span class="line">$ sudo service polipo start</span><br></pre></td></tr></table></figure>
 <h4 id="验证和使用"><a href="#验证和使用" class="headerlink" title="验证和使用"></a>验证和使用</h4><p>安装完成后使用下面代码验证效果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl ip.gs #查询你的IP地址和地理信息</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> http_proxy=http://localhost:8123 curl ip.gs</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl ip.gs <span class="comment">#查询你的IP地址和地理信息</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ http_proxy=http://localhost:8123 curl ip.gs</span><br></pre></td></tr></table></figure>
 <p>第二条语句得到的ip地址已经不是中国的了：“当前 IP：103.204.172.117 来自：日本大阪府大阪 starrydns.com”，说明安装成功。</p>
 <p>上面实验说明了想要为某个命令加上代理，就在前面使用：http_proxy=<a href="http://localhost:8123/" target="_blank" rel="noopener">http://localhost:8123</a></p>
 <p>ps：8123是polipo的默认端口，如有需要，可以修改成其他有效端口。</p>
 <h4 id="设置别名"><a href="#设置别名" class="headerlink" title="设置别名"></a>设置别名</h4><p>每一次都输入这么一串命令实在太不人性化，解决方法就是给这个命令一个缩写的别名，比如“hp”。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> vi .bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim .bashrc</span><br></pre></td></tr></table></figure>
 <p>打开配置文件，在最后面加上一句：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias hp="http_proxy=http://localhost:8123"</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> hp=<span class="string">"http_proxy=http://localhost:8123"</span></span><br></pre></td></tr></table></figure>
 <p>关闭文件，执行下面代码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> source ~/.bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>这样，hp就可以代表之前很长的命令，试验一下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hp curl ip.gs</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hp curl ip.gs</span><br></pre></td></tr></table></figure>
 <p>当前 IP：103.204.172.117 来自：日本大阪府大阪 starrydns.com ，bingo！</p>
 <h4 id="为当前会话设置全局代理"><a href="#为当前会话设置全局代理" class="headerlink" title="为当前会话设置全局代理"></a>为当前会话设置全局代理</h4><p>难道要在每条联网命令前面都加上“hp”？当然不会，以下操作可以让<strong>当前终端</strong>窗口的所有联网命令都经过代理，一条命令，接管所有：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> export http_proxy=http://localhost:8123 # 当前终端使用代理</span><br><span class="line"><span class="meta">$</span> unset http_proxy # 当前终端取消代理</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> http_proxy=http://localhost:8123 <span class="comment"># 当前终端使用代理</span></span><br><span class="line">$ <span class="built_in">unset</span> http_proxy <span class="comment"># 当前终端取消代理</span></span><br></pre></td></tr></table></figure>
 <h4 id="更为长久的代理设置"><a href="#更为长久的代理设置" class="headerlink" title="更为长久的代理设置"></a>更为长久的代理设置</h4><p>如果我想Ubuntu终端一直处于代理状态，能不能做到呢？这也是可以的，以下设置可以让本机的终端一直拥有代理能力，设置好后就完全不用操心了，类似于写入环境变量的操作。</p>
 <p>方法很简单，将以下语句：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://localhost:8123</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=http://localhost:8123</span><br></pre></td></tr></table></figure>
 <p>加入.bashrc文件末尾，再执行<code>source ~/.bashrc</code>即可；或者如果你使用了zsh，那么就是 ~/.zshrc。</p>
 <p>现在有很多网站使用了更安全的https协议，因此，上一句若为<code>export https_proxy=http://localhost:8123</code> 则能对htttps协议起作用，但是这两句在bashrc中共存，貌似会出问题，这里博主使用别名“hps”来调用，确保不出错。那下文的例子就很好解释了。</p>
 <p><strong>ps：实际使用中，某些命令貌似还是需要单独加hp，比如我用wget命令下载文件的时候，加上了别名hp ，下载速度才快得起来，例如：</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 加上hp，才能达到1M/s以上的下载速度</span><br><span class="line">wget hp https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip/download</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加上hp，才能达到1M/s以上的下载速度</span></span><br><span class="line">wget hp https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip/download</span><br></pre></td></tr></table></figure>
 <h2 id="其他代理-pip-git"><a href="#其他代理-pip-git" class="headerlink" title="其他代理(pip|git)"></a>其他代理(pip|git)</h2><h3 id="git-使用代理"><a href="#git-使用代理" class="headerlink" title="git 使用代理"></a>git 使用代理</h3><p>刚才的一大堆设置对git命令没有作用，为此我们要单独设置。</p>
 <p>事实上在git命令最后加参数可以实现代理：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--config http.proxy=localhost:8123</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--config http.proxy=localhost:8123</span><br></pre></td></tr></table></figure>
 <p>但我们仍然觉得不方便，还是起个别名吧，比如就叫“gp”。</p>
 <p>在.bashrc文件末尾加入这一句：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gp=" --config http.proxy=localhost:8123"</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gp=<span class="string">" --config http.proxy=localhost:8123"</span></span><br></pre></td></tr></table></figure>
 <p>执行<code>source ~/.bashrc</code></p>
 <p>以后，在git clone命令后面加入<code>$gp</code>就可以加快克隆速度，比如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git clone https://github.com/gmarik/Vundle.vim.git $gp</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/gmarik/Vundle.vim.git <span class="variable">$gp</span></span><br></pre></td></tr></table></figure>
 <h3 id="pip-使用代理"><a href="#pip-使用代理" class="headerlink" title="pip 使用代理"></a>pip 使用代理</h3><p>在配置完系统代理后，不需要配置 polipo 或 proxychains (配了似乎也没用？参见“后话”)，直接使用以下方法就可以实现代理，举例：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip --proxy socks5://127.0.0.2:1080 install tensorflow</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip --proxy socks5://127.0.0.2:1080 install tensorflow</span><br></pre></td></tr></table></figure>
 <p>pip 虽然能够管理包，却没有切换镜像源的功能，而我们下载的包，大多数都在国外大型的代码托管服务器上，这就导致了往往几M的包要下载一个小时。</p>
 <p>如果你已经给电脑部署了 HTTPS 以及 HTTP 代理，甚至给终端也配置了代理，但 pip 不吃这一套，所以就需要单独给 pip 设置代理。</p>
 <p>所幸，pip 有个选项，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--proxy &lt;proxy&gt;        Specify a proxy in the form [user:passwd@]proxy.server:port.</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--proxy &lt;proxy&gt;        Specify a proxy <span class="keyword">in</span> the form [user:passwd@]proxy.server:port.</span><br></pre></td></tr></table></figure>
 <p>我们直接用这个命令就好了，不过这个命令需要每次在你下载包时附加，比如这样：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 --proxy 127.0.0.1:6152 install snowlp</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 --proxy 127.0.0.1:6152 install snowlp</span><br></pre></td></tr></table></figure>
 <p>这太麻烦了，编辑 ~/.bashrc 文件，或者如果你使用了zsh，那么就是 ~/.zshrc ,在文末添加 <code>alias pip3=&quot;pip3 --proxy 127.0.0.1:6152&quot;</code>  (像我使用socks代理，则添加 <code>alias pip3=&quot;pip3 --proxy socks5://127.0.0.2:1080&quot;</code> )，下次打开终端后就不用每次都输入这么长的代理选项了。</p>
 <p>后话：</p>
 <p>如果使用 <code>sudo proxychains pip install 包名</code> 的方式实现 pip 代理，可能会<a href="https://stackoverflow.com/questions/38794015/pythons-requests-missing-dependencies-for-socks-support-when-using-socks5-fro" target="_blank" rel="noopener">报错</a>，这时候可以尝试先把系统代理关了(不关可能也行，只是速度慢)，然后 <code>sudo pip install pysocks</code> ，装完后再开启系统代理，再使用 <code>sudo proxychains pip install 包名</code> 的方式。很大可能仍然不行，比如我的会报错（无法识别socks版本）：</p>
@@ -636,6 +700,9 @@
           
 
   
+    <div class="comments" id="comments">
+    </div>
+  
 
 
 
@@ -699,10 +766,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">9</span>
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -717,6 +784,24 @@
                     <a href="https://github.com/godsing" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zzzpwang@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Godsing1" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/王耿鑫/100015993992707" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
                   </span>
                 
             </div>
@@ -770,7 +855,7 @@
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Godsing</span>
 
@@ -828,6 +913,8 @@
   
 
 
+  
+
 
 
 
@@ -868,6 +955,11 @@
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
 
   
 
@@ -897,7 +989,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
 
 
 
@@ -932,6 +1024,28 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'IJ3nRYlbTk5ht2yUt70RXSgI-gzGzoHsz',
+        appKey: 'RpV5LVtsDFUXRrfsN4MH9DR6',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀!快活啊~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
 
 
   
@@ -943,17 +1057,127 @@
   
 
   
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("IJ3nRYlbTk5ht2yUt70RXSgI-gzGzoHsz", "RpV5LVtsDFUXRrfsN4MH9DR6");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 
   
-  
 
   
   
 
+  
+  
+
 
   
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
 
   
 
