@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo-64.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo-32.png?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="自然语言处理,NLP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="我始终认为，学习新事物的时候，若能先有一个感性的认识，再去学具体的抽象知识和原理会有更深的体会。因此，本文首先介绍中文分词常用的工具及基本用法，然后再说明分词常用算法的原理或给出学习链接，最后总结中文分词的主要难点。 常见工具及用法工具1：pyltp">
+<meta name="keywords" content="自然语言处理,NLP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【中文分词】常见工具及算法">
+<meta property="og:url" content="http://godsing.top/2018/08/06/【中文分词】常见工具及算法/index.html">
+<meta property="og:site_name" content="Godsing&#39;s Blog">
+<meta property="og:description" content="我始终认为，学习新事物的时候，若能先有一个感性的认识，再去学具体的抽象知识和原理会有更深的体会。因此，本文首先介绍中文分词常用的工具及基本用法，然后再说明分词常用算法的原理或给出学习链接，最后总结中文分词的主要难点。 常见工具及用法工具1：pyltp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-07T08:18:25.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【中文分词】常见工具及算法">
+<meta name="twitter:description" content="我始终认为，学习新事物的时候，若能先有一个感性的认识，再去学具体的抽象知识和原理会有更深的体会。因此，本文首先介绍中文分词常用的工具及基本用法，然后再说明分词常用算法的原理或给出学习链接，最后总结中文分词的主要难点。 常见工具及用法工具1：pyltp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://godsing.top/2018/08/06/【中文分词】常见工具及算法/"/>
+
+
+
+
+
+  <title>【中文分词】常见工具及算法 | Godsing's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Godsing's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">探索ing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://godsing.top/2018/08/06/【中文分词】常见工具及算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Godsing">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Godsing's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【中文分词】常见工具及算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-06T00:00:00+08:00">
+                2018-08-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-07T16:18:25+08:00">
+                2018-08-07
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/06/【中文分词】常见工具及算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/08/06/【中文分词】常见工具及算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/08/06/【中文分词】常见工具及算法/" class="leancloud_visitors" data-flag-title="【中文分词】常见工具及算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,846 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我始终认为，学习新事物的时候，若能先有一个感性的认识，再去学具体的抽象知识和原理会有更深的体会。因此，本文首先介绍中文分词常用的工具及基本用法，然后再说明分词常用算法的原理或给出学习链接，最后总结中文分词的主要难点。</p>
+<h2 id="常见工具及用法"><a href="#常见工具及用法" class="headerlink" title="常见工具及用法"></a>常见工具及用法</h2><h3 id="工具1：pyltp"><a href="#工具1：pyltp" class="headerlink" title="工具1：pyltp"></a>工具1：pyltp</h3><a id="more"></a>
+<h4 id="分句"><a href="#分句" class="headerlink" title="分句"></a>分句</h4><p>使用 pyltp 进行分句示例如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pyltp <span class="keyword">import</span> SentenceSplitter</span><br><span class="line">sents = SentenceSplitter.split(<span class="string">'元芳你怎么看？我就趴窗口上看呗！'</span>)  <span class="comment"># 分句</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'\n'</span>.join(sents)</span><br></pre></td></tr></table></figure>
+<p>结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">元芳你怎么看？</span><br><span class="line">我就趴窗口上看呗！</span><br></pre></td></tr></table></figure>
+<h4 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h4><p>使用 pyltp 进行分词示例如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">LTP_DATA_DIR = <span class="string">'/path/to/your/ltp_data'</span>  <span class="comment"># ltp模型目录的路径</span></span><br><span class="line">cws_model_path = os.path.join(LTP_DATA_DIR, <span class="string">'cws.model'</span>)  <span class="comment"># 分词模型路径，模型名称为`cws.model`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pyltp <span class="keyword">import</span> Segmentor</span><br><span class="line">segmentor = Segmentor()  <span class="comment"># 初始化实例</span></span><br><span class="line">segmentor.load(cws_model_path)  <span class="comment"># 加载模型</span></span><br><span class="line">words = segmentor.segment(<span class="string">'元芳你怎么看'</span>)  <span class="comment"># 分词</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'\t'</span>.join(words)</span><br><span class="line">segmentor.release()  <span class="comment"># 释放模型</span></span><br></pre></td></tr></table></figure>
+<p>结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">元芳  你       怎么      看</span><br></pre></td></tr></table></figure>
+<p><code>words = segmentor.segment(&#39;元芳你怎么看&#39;)</code> 的返回值类型是native的VectorOfString类型，可以使用list转换成Python的列表类型，例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>words = segmentor.segment(<span class="string">'元芳你怎么看'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(words)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">pyltp</span>.<span class="title">VectorOfString</span>'&gt;</span></span><br><span class="line">&gt;&gt;&gt; words_list = list(words)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(words_list)</span><br><span class="line">&lt;type <span class="string">'list'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> words_list</span><br><span class="line">[<span class="string">'\xe5\xae\xa2\xe6\x9c\x8d'</span>, <span class="string">'\xe5\xa4\xaa'</span>, <span class="string">'\xe7\xb3\x9f\xe7\xb3\x95'</span>, <span class="string">'\xe4\xba\x86'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="使用分词外部词典"><a href="#使用分词外部词典" class="headerlink" title="使用分词外部词典"></a>使用分词外部词典</h4><p>pyltp 分词支持用户使用自定义词典。分词外部词典本身是一个文本文件（plain text），每行指定一个词，编码同样须为 UTF-8，样例如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">苯并芘</span><br><span class="line">亚硝酸盐</span><br></pre></td></tr></table></figure>
+<p>示例如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">LTP_DATA_DIR = <span class="string">'/path/to/your/ltp_data'</span>  <span class="comment"># ltp模型目录的路径</span></span><br><span class="line">cws_model_path = os.path.join(LTP_DATA_DIR, <span class="string">'cws.model'</span>)  <span class="comment"># 分词模型路径，模型名称为`cws.model`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pyltp <span class="keyword">import</span> Segmentor</span><br><span class="line">segmentor = Segmentor()  <span class="comment"># 初始化实例</span></span><br><span class="line">segmentor.load_with_lexicon(cws_model_path, <span class="string">'/path/to/your/lexicon'</span>) <span class="comment"># 加载模型，第二个参数是您的外部词典文件路径</span></span><br><span class="line">words = segmentor.segment(<span class="string">'亚硝酸盐是一种化学物质'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'\t'</span>.join(words)</span><br><span class="line">segmentor.release()</span><br></pre></td></tr></table></figure>
+<h4 id="使用个性化分词模型"><a href="#使用个性化分词模型" class="headerlink" title="使用个性化分词模型"></a>使用个性化分词模型</h4><p>个性化分词是 LTP 的特色功能。个性化分词为了解决测试数据切换到如小说、财经等不同于新闻领域的领域。 在切换到新领域时，用户只需要标注少量数据。 个性化分词会在原有新闻数据基础之上进行增量训练。 从而达到即利用新闻领域的丰富数据，又兼顾目标领域特殊性的目的。</p>
+<p>pyltp 支持使用用户训练好的个性化模型。关于个性化模型的训练需使用 LTP，详细介绍和训练方法请参考 <a href="http://ltp.readthedocs.org/zh_CN/latest/theory.html#customized-cws-reference-label" target="_blank" rel="noopener">个性化分词</a> 。</p>
+<p>在 pyltp 中使用个性化分词模型的示例如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">LTP_DATA_DIR = <span class="string">'/path/to/your/ltp_data'</span>  <span class="comment"># ltp模型目录的路径</span></span><br><span class="line">cws_model_path = os.path.join(LTP_DATA_DIR, <span class="string">'cws.model'</span>)  <span class="comment"># 分词模型路径，模型名称为`cws.model`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pyltp <span class="keyword">import</span> CustomizedSegmentor</span><br><span class="line">customized_segmentor = CustomizedSegmentor()  <span class="comment"># 初始化实例</span></span><br><span class="line">customized_segmentor.load(cws_model_path, <span class="string">'/path/to/your/customized_model'</span>) <span class="comment"># 加载模型，第二个参数是您的增量模型路径</span></span><br><span class="line">words = customized_segmentor.segment(<span class="string">'亚硝酸盐是一种化学物质'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'\t'</span>.join(words)</span><br><span class="line">customized_segmentor.release()</span><br></pre></td></tr></table></figure>
+<p>同样，使用个性化分词模型的同时也可以使用外部词典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">LTP_DATA_DIR = <span class="string">'/path/to/your/ltp_data'</span>  <span class="comment"># ltp模型目录的路径</span></span><br><span class="line">cws_model_path = os.path.join(LTP_DATA_DIR, <span class="string">'cws.model'</span>)  <span class="comment"># 分词模型路径，模型名称为`cws.model`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pyltp <span class="keyword">import</span> CustomizedSegmentor</span><br><span class="line">customized_segmentor = CustomizedSegmentor()  <span class="comment"># 初始化实例</span></span><br><span class="line">customized_segmentor.load_with_lexicon(cws_model_path, <span class="string">'/path/to/your/customized_model'</span>, <span class="string">'/path/to/your/lexicon'</span>) <span class="comment"># 加载模型</span></span><br><span class="line">words = customized_segmentor.segment(<span class="string">'亚硝酸盐是一种化学物质'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'\t'</span>.join(words)</span><br><span class="line">customized_segmentor.release()</span><br></pre></td></tr></table></figure>
+<h4 id="分词标注集"><a href="#分词标注集" class="headerlink" title="分词标注集"></a>分词标注集</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>含义</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B</td>
+<td>词首</td>
+<td><strong>中</strong>国</td>
+</tr>
+<tr>
+<td>I</td>
+<td>词中</td>
+<td>哈<strong>工</strong>大</td>
+</tr>
+<tr>
+<td>E</td>
+<td>词尾</td>
+<td>科<strong>学</strong></td>
+</tr>
+<tr>
+<td>S</td>
+<td>单字成词</td>
+<td>的</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="工具2：jieba"><a href="#工具2：jieba" class="headerlink" title="工具2：jieba"></a>工具2：jieba</h3><h4 id="分词-1"><a href="#分词-1" class="headerlink" title="分词"></a>分词</h4><ul>
+<li><code>jieba.cut</code> 方法接受三个输入参数: 需要分词的字符串；cut_all 参数用来控制是否采用全模式；HMM 参数用来控制是否使用 HMM 模型</li>
+<li><code>jieba.cut_for_search</code> 方法接受两个参数：需要分词的字符串；是否使用 HMM 模型。该方法适合用于搜索引擎构建倒排索引的分词，粒度比较细</li>
+<li>待分词的字符串可以是 unicode 或 UTF-8 字符串、GBK 字符串。注意：不建议直接输入 GBK 字符串，可能无法预料地错误解码成 UTF-8</li>
+<li><code>jieba.cut</code> 以及 <code>jieba.cut_for_search</code> 返回的结构都是一个可迭代的 generator，可以使用 for 循环来获得分词后得到的每一个词语(unicode)，或者用</li>
+<li><code>jieba.lcut</code> 以及 <code>jieba.lcut_for_search</code> 直接返回 list</li>
+<li><code>jieba.Tokenizer(dictionary=DEFAULT_DICT)</code> 新建自定义分词器，可用于同时使用不同词典。<code>jieba.dt</code> 为默认分词器，所有全局分词相关函数都是该分词器的映射。</li>
+</ul>
+<p>代码示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">"我来到北京清华大学"</span>, cut_all=<span class="keyword">True</span>)</span><br><span class="line">print(<span class="string">"Full Mode: "</span> + <span class="string">"/ "</span>.join(seg_list))  <span class="comment"># 全模式</span></span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">"我来到北京清华大学"</span>, cut_all=<span class="keyword">False</span>)</span><br><span class="line">print(<span class="string">"Default Mode: "</span> + <span class="string">"/ "</span>.join(seg_list))  <span class="comment"># 精确模式</span></span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut(<span class="string">"他来到了网易杭研大厦"</span>)  <span class="comment"># 默认是精确模式</span></span><br><span class="line">print(<span class="string">", "</span>.join(seg_list))</span><br><span class="line"></span><br><span class="line">seg_list = jieba.cut_for_search(<span class="string">"小明硕士毕业于中国科学院计算所，后在日本京都大学深造"</span>)  <span class="comment"># 搜索引擎模式</span></span><br><span class="line">print(<span class="string">", "</span>.join(seg_list))</span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">【全模式】: 我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学</span><br><span class="line"></span><br><span class="line">【精确模式】: 我/ 来到/ 北京/ 清华大学</span><br><span class="line"></span><br><span class="line">【新词识别】：他, 来到, 了, 网易, 杭研, 大厦    (此处，“杭研”并没有在词典中，但是也被Viterbi算法识别出来了)</span><br><span class="line"></span><br><span class="line">【搜索引擎模式】： 小明, 硕士, 毕业, 于, 中国, 科学, 学院, 科学院, 中国科学院, 计算, 计算所, 后, 在, 日本, 京都, 大学, 日本京都大学, 深造</span><br></pre></td></tr></table></figure>
+<h4 id="添加自定义词典"><a href="#添加自定义词典" class="headerlink" title="添加自定义词典"></a>添加自定义词典</h4><hr>
+<p><strong>载入词典</strong></p>
+<ul>
+<li>开发者可以指定自己自定义的词典，以便包含 jieba 词库里没有的词。虽然 jieba 有新词识别能力，但是自行添加新词可以保证更高的正确率</li>
+<li>用法： jieba.load_userdict(file_name) # file_name 为文件类对象或自定义词典的路径</li>
+<li>词典格式和 <code>dict.txt</code> 一样，一个词占一行；每一行分三部分：词语、词频（可省略）、词性（可省略），用空格隔开，顺序不可颠倒。<code>file_name</code> 若为路径或二进制方式打开的文件，则文件必须为 UTF-8 编码。</li>
+<li>词频省略时使用自动计算的能保证分出该词的词频。</li>
+</ul>
+<p><strong>例如：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">创新办 3 i</span><br><span class="line">云计算 5</span><br><span class="line">凱特琳 nz</span><br><span class="line">台中</span><br></pre></td></tr></table></figure>
+<ul>
+<li>更改分词器（默认为 <code>jieba.dt</code>）的 <code>tmp_dir</code> 和 <code>cache_file</code> 属性，可分别指定缓存文件所在的文件夹及其文件名，用于受限的文件系统。</li>
+<li>范例：<ul>
+<li>自定义词典：<a href="https://github.com/fxsjy/jieba/blob/master/test/userdict.txt" target="_blank" rel="noopener">https://github.com/fxsjy/jieba/blob/master/test/userdict.txt</a></li>
+<li>用法示例：<a href="https://github.com/fxsjy/jieba/blob/master/test/test_userdict.py" target="_blank" rel="noopener">https://github.com/fxsjy/jieba/blob/master/test/test_userdict.py</a><ul>
+<li>之前： 李小福 / 是 / 创新 / 办 / 主任 / 也 / 是 / 云 / 计算 / 方面 / 的 / 专家 /</li>
+<li>加载自定义词库后：　李小福 / 是 / 创新办 / 主任 / 也 / 是 / 云计算 / 方面 / 的 / 专家 /</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>调整词典</strong></p>
+<ul>
+<li>使用 <code>add_word(word, freq=None, tag=None)</code> 和 <code>del_word(word)</code> 可在程序中动态修改词典。</li>
+<li>使用 <code>suggest_freq(segment, tune=True)</code> 可调节单个词语的词频，使其能（或不能）被分出来。</li>
+<li>注意：自动计算的词频在使用 HMM 新词发现功能时可能无效。</li>
+</ul>
+<p>代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'/'</span>.join(jieba.cut(<span class="string">'如果放到post中将出错。'</span>, HMM=<span class="keyword">False</span>)))</span><br><span class="line">如果/放到/post/中将/出错/。</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>jieba.suggest_freq((<span class="string">'中'</span>, <span class="string">'将'</span>), <span class="keyword">True</span>)</span><br><span class="line"><span class="number">494</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'/'</span>.join(jieba.cut(<span class="string">'如果放到post中将出错。'</span>, HMM=<span class="keyword">False</span>)))</span><br><span class="line">如果/放到/post/中/将/出错/。</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'/'</span>.join(jieba.cut(<span class="string">'「台中」正确应该不会被切开'</span>, HMM=<span class="keyword">False</span>)))</span><br><span class="line">「/台/中/」/正确/应该/不会/被/切开</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>jieba.suggest_freq(<span class="string">'台中'</span>, <span class="keyword">True</span>)</span><br><span class="line"><span class="number">69</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'/'</span>.join(jieba.cut(<span class="string">'「台中」正确应该不会被切开'</span>, HMM=<span class="keyword">False</span>)))</span><br><span class="line">「/台中/」/正确/应该/不会/被/切开</span><br></pre></td></tr></table></figure>
+<ul>
+<li>“通过用户自定义词典来增强歧义纠错能力” —- <a href="https://github.com/fxsjy/jieba/issues/14" target="_blank" rel="noopener">https://github.com/fxsjy/jieba/issues/14</a></li>
+</ul>
+<h3 id="工具3：thulac-python"><a href="#工具3：thulac-python" class="headerlink" title="工具3：thulac-python"></a>工具3：thulac-python</h3><h4 id="接口使用示例"><a href="#接口使用示例" class="headerlink" title="接口使用示例"></a>接口使用示例</h4><ul>
+<li><p>python版</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">代码示例<span class="number">1</span></span><br><span class="line"><span class="keyword">import</span> thulac	</span><br><span class="line"></span><br><span class="line">thu1 = thulac.thulac()  <span class="comment">#默认模式</span></span><br><span class="line">text = thu1.cut(<span class="string">"我爱北京天安门"</span>, text=<span class="keyword">True</span>)  <span class="comment">#进行一句话分词</span></span><br><span class="line">print(text)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">代码示例<span class="number">2</span></span><br><span class="line">thu1 = thulac.thulac(seg_only=<span class="keyword">True</span>)  <span class="comment">#只进行分词，不进行词性标注</span></span><br><span class="line">thu1.cut_f(<span class="string">"input.txt"</span>, <span class="string">"output.txt"</span>)  <span class="comment">#对input.txt文件内容进行分词，输出到output.txt</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="接口参数"><a href="#接口参数" class="headerlink" title="接口参数"></a>接口参数</h4><ul>
+<li><p><code>thulac(user_dict=None, model_path=None, T2S=False, seg_only=False, filt=False, deli=&#39;_&#39;)</code>初始化程序，进行自定义设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user_dict	      	设置用户词典，用户词典中的词会被打上uw标签。词典中每一个词一行，UTF8编码</span><br><span class="line">T2S					默认False, 是否将句子从繁体转化为简体</span><br><span class="line">seg_only	   		默认False, 时候只进行分词，不进行词性标注</span><br><span class="line">filt		   		默认False, 是否使用过滤器去除一些没有意义的词语，例如“可以”。</span><br><span class="line">model_path	 	    设置模型文件所在文件夹，默认为models/</span><br><span class="line">deli	 	      	默认为‘_’, 设置词与词性之间的分隔符</span><br></pre></td></tr></table></figure>
+<p> rm_space           默认为False, 是否去掉原文本中的空格后再进行分词 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- `cut(文本, text=False)` 对一句话进行分词</span><br></pre></td></tr></table></figure></p>
+<p> text                 默认为False, 是否返回文本，不返回文本则返回一个二维数组([[word, tag]..]),seg_only模式下tag为空字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- `cut_f(输入文件, 输出文件)` 对文件进行分词</span><br><span class="line"></span><br><span class="line">- `run()` 命令行交互式分词(屏幕输入、屏幕输出)</span><br><span class="line"></span><br><span class="line">#### 命令行运行(限pip安装使用)</span><br><span class="line"></span><br><span class="line">直接调用</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">python -m thulac input.txt output.txt</span><br><span class="line">#从input.txt读入，并将分词和词性标注结果输出到ouptut.txt中</span><br><span class="line"></span><br><span class="line">#如果只需要分词功能，可在增加参数&quot;seg_only&quot; </span><br><span class="line">python -m thulac input.txt output.txt seg_only</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="fast接口"><a href="#fast接口" class="headerlink" title="fast接口"></a>fast接口</h4><p>(请<a href="https://github.com/thunlp/THULAC.so" target="_blank" rel="noopener">下载</a>make后将得到的libthulac.so放入models文件夹同目录下)</p>
+<p>有两个函数实现了fast接口，仅函数名改变，参数使用同普通函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -&gt; fast_cut, cut_f -&gt; fast_cut_f</span><br></pre></td></tr></table></figure>
+<h3 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h3><h4 id="工具列表"><a href="#工具列表" class="headerlink" title="工具列表"></a>工具列表</h4><p>中科院计算所NLPIR <a href="https://link.zhihu.com/?target=http%3A//ictclas.nlpir.org/nlpir/" target="_blank" rel="noopener">http://ictclas.nlpir.org/nlpir/</a> </p>
+<p>ansj分词器 <a href="https://link.zhihu.com/?target=https%3A//github.com/NLPchina/ansj_seg" target="_blank" rel="noopener">https://github.com/NLPchina/ansj_seg</a></p>
+<p>斯坦福分词器 <a href="https://link.zhihu.com/?target=https%3A//nlp.stanford.edu/software/segmenter.shtml" target="_blank" rel="noopener">https://nlp.stanford.edu/software/segmenter.shtml</a></p>
+<p>Hanlp分词器 <a href="https://link.zhihu.com/?target=https%3A//github.com/hankcs/HanLP" target="_blank" rel="noopener">https://github.com/hankcs/HanLP</a></p>
+<p>KCWS分词器(字嵌入+Bi-LSTM+CRF) <a href="https://link.zhihu.com/?target=https%3A//github.com/koth/kcws" target="_blank" rel="noopener">https://github.com/koth/kcws</a></p>
+<p>ZPar <a href="https://link.zhihu.com/?target=https%3A//github.com/frcchang/zpar/releases" target="_blank" rel="noopener">https://github.com/frcchang/zpar/releases</a></p>
+<p>IKAnalyzer <a href="https://link.zhihu.com/?target=https%3A//github.com/wks/ik-analyzer" target="_blank" rel="noopener">https://github.com/wks/ik-analyzer</a></p>
+<h4 id="简单说明"><a href="#简单说明" class="headerlink" title="简单说明"></a>简单说明</h4><p><strong>哈工大的分词器</strong>：主页上给过调用接口，每秒请求的次数有限制。</p>
+<p><strong>清华大学THULAC</strong>：目前已经有Java、Python和C++版本，并且代码开源。</p>
+<p><strong>斯坦福分词器</strong>：作为众多斯坦福自然语言处理中的一个包，目前最新版本3.7.0， Java实现的CRF算法。可以直接使用训练好的模型，也提供训练模型接口。</p>
+<p><strong>Hanlp分词</strong>：求解的是最短路径。优点：开源、有人维护、可以解答。原始模型用的训练语料是人民日报的语料，当然如果你有足够的语料也可以自己训练。</p>
+<p><strong>结巴分词工具</strong>：基于前缀词典实现高效的词图扫描，生成句子中汉字所有可能成词情况所构成的有向无环图 (DAG)；采用了动态规划查找最大概率路径, 找出基于词频的最大切分组合；对于未登录词，采用了基于汉字成词能力的 HMM 模型，使用了 Viterbi 算法。</p>
+<p><strong>字嵌入+Bi-LSTM+CRF分词器</strong>：本质上是序列标注，这个分词器用人民日报的80万语料，据说按照字符正确率评估标准能达到97.5%的准确率，各位感兴趣可以去看看。</p>
+<p><strong>ZPar分词器</strong>：新加坡科技设计大学开发的中文分词器，包括分词、词性标注和Parser，支持多语言，据说效果是公开的分词器中最好的，C++语言编写。</p>
+<h3 id="速度对比"><a href="#速度对比" class="headerlink" title="速度对比"></a>速度对比</h3><p>由于分词是基础组件，其性能也是关键的考量因素。通常，分词速度跟系统的软硬件环境有相关外，还与<strong>词典的结构设计和算法复杂度</strong>相关。字嵌入+Bi-LSTM+CRF分词器，其速度相对较慢。另外，开源项目 <a href="https://link.zhihu.com/?target=https%3A//github.com/ysc/cws_evaluation" target="_blank" rel="noopener">https://github.com/ysc/cws_evaluation</a> 曾对多款分词器速度和效果进行过对比，可供参考。</p>
+<h3 id="公开的分词数据集"><a href="#公开的分词数据集" class="headerlink" title="公开的分词数据集"></a>公开的分词数据集</h3><p>测试数据集</p>
+<p>1、SIGHAN Bakeoff 2005 MSR,560KB  </p>
+<p><a href="https://link.zhihu.com/?target=http%3A//sighan.cs.uchicago.edu/bakeoff2005/" target="_blank" rel="noopener">http://sighan.cs.uchicago.edu/bakeoff2005/</a></p>
+<p>2、SIGHAN Bakeoff 2005 PKU, 510KB  </p>
+<p><a href="https://link.zhihu.com/?target=http%3A//sighan.cs.uchicago.edu/bakeoff2005/" target="_blank" rel="noopener">http://sighan.cs.uchicago.edu/bakeoff2005/</a></p>
+<p>3、人民日报 2014, 65MB  </p>
+<p><a href="https://link.zhihu.com/?target=https%3A//pan.baidu.com/s/1hq3KKXe" target="_blank" rel="noopener">https://pan.baidu.com/s/1hq3KKXe</a></p>
+<h2 id="常用分词算法及原理"><a href="#常用分词算法及原理" class="headerlink" title="常用分词算法及原理"></a>常用分词算法及原理</h2><h3 id="基于词典"><a href="#基于词典" class="headerlink" title="基于词典"></a>基于词典</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>也称为字符串匹配分词算法。将待匹配的字符串和已有的“充分大的”词典中的词进行匹配，若匹配成功，则识别了该词。识别出一个词，根据扫描方向的不同分为正向匹配和逆向匹配。根据不同长度优先匹配的情况，分为最大（最长）匹配和最小（最短）匹配。这是一类算法，较常见的有：正向最大匹配法、逆向最大匹配法、双向匹配分词法。</p>
+<ul>
+<li>最大正向匹配法(MM, MaximumMatching Method)</li>
+</ul>
+<p>通常简称为MM法。其基本思想为：假定分词词典中的最长词有 i 个汉字字符，则用被处理文档的当前字串中的前 i 个字作为匹配字段，查找字典。若字典中存在这样的一个i字词，则匹配成功，匹配字段被作为一个词切分出来。如果词典中找不到这样的一个i字词，则匹配失败，将匹配字段中的最后一个字去掉，对剩下的字串重新进行匹配处理。</p>
+<ul>
+<li>逆向最大匹配法(ReverseMaximum Matching Method)</li>
+</ul>
+<p>先将文档进行倒排处理，生成逆序文档。然后，根据逆序词典，对逆序文档用正向最大匹配法处理即可。</p>
+<p>由于汉语中偏正结构较多，若从后向前匹配，可以适当提高精确度。所以，逆向最大匹配法比正向最大匹配法的误差要小。统计结果表明 ,单纯使用正向最大匹配的错误率为 1/169，单纯使用逆向最大匹配的错误率为 1/245。</p>
+<p>在实际使用时，为了提高系统分词的准确度，可以采用正向最大匹配法和逆向最大匹配法相结合的分词方案。</p>
+<ul>
+<li>双向匹配法</li>
+</ul>
+<p>先根据标点对文档进行粗切分，把文档分解成若干个句子，然后再对这些句子用正向最大匹配法和逆向最大匹配法进行扫描切分。如果两种分词方法得到的匹配结果相同，则认为分词正确，否则，按最小集处理。</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>因为词典已经建立好，所以该类算法的特点是速度快。而且这种分词算法很直观，符合人的思维方式，是较早提出的分词方案，也因此应用范围很广泛。</p>
+<p>缺点：严重依赖于词典，不能根据文档上下文的语义特征来切分词语，对于未登录词的分词效果差。</p>
+<h4 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h4><p>很明显，要优化这种分词方法，主要的着力点在两个方面：</p>
+<p>一是在词典方面：扩充词典，同时保证准确性；改变词表的组织结构（比如字典树、哈希索引）以提高效率。</p>
+<p>二是优化字符串匹配算法：比如设定最大长度、字符串存储和查找的方式等等。</p>
+<h3 id="基于统计机器学习"><a href="#基于统计机器学习" class="headerlink" title="基于统计机器学习"></a>基于统计机器学习</h3><p>这类目前常用的是算法是<strong>HMM、CRF、SVM、深度学习</strong>等算法，比如stanford、Hanlp分词工具是基于CRF算法。</p>
+<p>以CRF为例，基本思路是对汉字进行标注训练，不仅考虑了词语出现的频率，还考虑上下文，具备较好的学习能力，因此其对歧义词和未登录词的识别都具有良好的效果。比如上面用到的工具 pyltp，底层的原理就是 CRF。</p>
+<p>CRF（条件随机场）不是几句话可以介绍清楚的，要深入学习 CRF，可以参考：</p>
+<ul>
+<li>李航的《统计学习方法》第11章 - 条件随机场</li>
+<li><a href="https://www.zhihu.com/question/35866596" target="_blank" rel="noopener">如何用简单易懂的例子解释条件随机场（CRF）模型？</a></li>
+</ul>
+<p>常见的分词器都是使用机器学习算法和词典相结合，一方面能够提高分词准确率，另一方面能够改善领域适应性。</p>
+<h3 id="基于深度学习"><a href="#基于深度学习" class="headerlink" title="基于深度学习"></a>基于深度学习</h3><p>随着深度学习的兴起，也出现了基于神经网络的分词器，例如有人员尝试使用 <strong>双向LSTM+CRF</strong> 实现分词器，其本质上是序列标注，所以有通用性，命名实体识别等都可以使用该模型，据报道其分词器字符准确率可高达97.5%。算法框架的思路与论文《<a href="https://arxiv.org/abs/1603.01360" target="_blank" rel="noopener">Neural Architectures for Named Entity Recognition</a>》类似，利用该框架可以实现中文分词。</p>
+<h2 id="中文分词的难点"><a href="#中文分词的难点" class="headerlink" title="中文分词的难点"></a>中文分词的难点</h2><p>目前中文分词难点主要有三个：</p>
+<p>1、分词标准：比如人名，在哈工大的标准中姓和名是分开的，但在Hanlp中是合在一起的。这需要根据不同的需求制定不同的分词标准。</p>
+<p>2、歧义：对同一个待切分字符串存在多个分词结果。</p>
+<p>歧义又分为组合型歧义、交集型歧义和真歧义三种类型。</p>
+<p>1) 组合型歧义：分词是有不同的粒度的，指某个词条中的一部分也可以切分为一个独立的词条。比如“中华人民共和国”，粗粒度的分词就是“中华人民共和国”，细粒度的分词可能是“中华/人民/共和国”</p>
+<p>2) 交集型歧义：在“郑州天和服装厂”中，“天和”是厂名，是一个专有词，“和服”也是一个词，它们共用了“和”字。</p>
+<p>3) 真歧义：本身的语法和语义都没有问题, 即便采用人工切分也会产生同样的歧义，只有通过上下文的语义环境才能给出正确的切分结果。例如：对于句子“美国会通过对台售武法案”，既可以切分成“美国/会/通过对台售武法案”，又可以切分成“美/国会/通过对台售武法案”。</p>
+<p>一般在搜索引擎中，构建索引时和查询时会使用不同的分词算法。常用的方案是，在索引的时候使用细粒度的分词以保证召回，在查询的时候使用粗粒度的分词以保证精度。</p>
+<p>3、新词：也称未被词典收录的词，该问题的解决依赖于人们对分词技术和汉语语言结构的进一步认识。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="http://pyltp.readthedocs.io/zh_CN/latest/api.html" target="_blank" rel="noopener">使用 pyltp</a></li>
+<li><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">jieba - GitHub</a></li>
+<li>有哪些比较好的中文分词方案？ - <a href="https://www.zhihu.com/question/19578687/answer/190569700" target="_blank" rel="noopener">竹间智能 Emotibot的回答</a> - 知乎</li>
+<li><a href="https://blog.csdn.net/DianaCody/article/details/40950169" target="_blank" rel="noopener">【NLP】中文分词：原理及分词算法</a> </li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自然语言处理/" rel="tag"># 自然语言处理</a>
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/13/Linux下shadowsocks各种代理方式总结/" rel="next" title="Linux下shadowsocks各种代理方式总结">
+                <i class="fa fa-chevron-left"></i> Linux下shadowsocks各种代理方式总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Godsing" />
+            
+              <p class="site-author-name" itemprop="name">Godsing</p>
+              <p class="site-description motion-element" itemprop="description">钥匙不在锁孔里</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/godsing" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zzzpwang@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Godsing1" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/profile.php?id=100015993992707" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见工具及用法"><span class="nav-number">1.</span> <span class="nav-text">常见工具及用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工具1：pyltp"><span class="nav-number">1.1.</span> <span class="nav-text">工具1：pyltp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分句"><span class="nav-number">1.1.1.</span> <span class="nav-text">分句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分词"><span class="nav-number">1.1.2.</span> <span class="nav-text">分词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用分词外部词典"><span class="nav-number">1.1.3.</span> <span class="nav-text">使用分词外部词典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用个性化分词模型"><span class="nav-number">1.1.4.</span> <span class="nav-text">使用个性化分词模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分词标注集"><span class="nav-number">1.1.5.</span> <span class="nav-text">分词标注集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具2：jieba"><span class="nav-number">1.2.</span> <span class="nav-text">工具2：jieba</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分词-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">分词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加自定义词典"><span class="nav-number">1.2.2.</span> <span class="nav-text">添加自定义词典</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具3：thulac-python"><span class="nav-number">1.3.</span> <span class="nav-text">工具3：thulac-python</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#接口使用示例"><span class="nav-number">1.3.1.</span> <span class="nav-text">接口使用示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口参数"><span class="nav-number">1.3.2.</span> <span class="nav-text">接口参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fast接口"><span class="nav-number">1.3.3.</span> <span class="nav-text">fast接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他工具"><span class="nav-number">1.4.</span> <span class="nav-text">其他工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工具列表"><span class="nav-number">1.4.1.</span> <span class="nav-text">工具列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单说明"><span class="nav-number">1.4.2.</span> <span class="nav-text">简单说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#速度对比"><span class="nav-number">1.5.</span> <span class="nav-text">速度对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公开的分词数据集"><span class="nav-number">1.6.</span> <span class="nav-text">公开的分词数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用分词算法及原理"><span class="nav-number">2.</span> <span class="nav-text">常用分词算法及原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于词典"><span class="nav-number">2.1.</span> <span class="nav-text">基于词典</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">2.1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">2.1.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化方向"><span class="nav-number">2.1.3.</span> <span class="nav-text">优化方向</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于统计机器学习"><span class="nav-number">2.2.</span> <span class="nav-text">基于统计机器学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于深度学习"><span class="nav-number">2.3.</span> <span class="nav-text">基于深度学习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中文分词的难点"><span class="nav-number">3.</span> <span class="nav-text">中文分词的难点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Godsing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> <!-- v5.1.3 --> </div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'IJ3nRYlbTk5ht2yUt70RXSgI-gzGzoHsz',
+        appKey: 'RpV5LVtsDFUXRrfsN4MH9DR6',
+        placeholder: 'ヾﾉ≧∀≦)o 来呀!快活啊~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("IJ3nRYlbTk5ht2yUt70RXSgI-gzGzoHsz", "RpV5LVtsDFUXRrfsN4MH9DR6");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+</body>
+</html>
