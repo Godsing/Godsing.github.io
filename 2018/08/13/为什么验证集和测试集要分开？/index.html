@@ -87,7 +87,7 @@
 
 
 
-  <meta name="keywords" content="算法,动态规划," />
+  <meta name="keywords" content="机器学习," />
 
 
 
@@ -98,20 +98,18 @@
 
 
 
-<meta name="description" content="核心概念 阶段$k$ 状态变量$x_k$（状态集合） 决策变量$u_k$（决策集合$D_k(x_k)$，状态转移方程$x_{k+1}=T(x_k,u_k)$可以看成是理所应当的，是$u_k$作为决策变量的必要条件） 最优指标函数$f_k(x_k)$（指标函数$V_{k,n}$：当前状态变量、现阶段子策略(=决策变量+下阶段最优子策略) 的函数；阶段指标$v_k(x_k,u_k)$；策略$p_{k,">
-<meta name="keywords" content="算法,动态规划">
+<meta name="description" content="以下是 stackexchange.com 上的一个问题以及回答。最后记录自己的思考和总结。 What is the difference between test set and validation set?I found this confusing when I use the neural network toolbox in Matlab.It divided the raw data">
+<meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="动态规划">
-<meta property="og:url" content="http://godsing.top/2018/01/19/动态规划/index.html">
+<meta property="og:title" content="为什么验证集和测试集要分开？">
+<meta property="og:url" content="http://godsing.top/2018/08/13/为什么验证集和测试集要分开？/index.html">
 <meta property="og:site_name" content="Godsing&#39;s Blog">
-<meta property="og:description" content="核心概念 阶段$k$ 状态变量$x_k$（状态集合） 决策变量$u_k$（决策集合$D_k(x_k)$，状态转移方程$x_{k+1}=T(x_k,u_k)$可以看成是理所应当的，是$u_k$作为决策变量的必要条件） 最优指标函数$f_k(x_k)$（指标函数$V_{k,n}$：当前状态变量、现阶段子策略(=决策变量+下阶段最优子策略) 的函数；阶段指标$v_k(x_k,u_k)$；策略$p_{k,">
+<meta property="og:description" content="以下是 stackexchange.com 上的一个问题以及回答。最后记录自己的思考和总结。 What is the difference between test set and validation set?I found this confusing when I use the neural network toolbox in Matlab.It divided the raw data">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-1-15/72271754.jpg">
-<meta property="og:updated_time" content="2018-04-15T05:56:53.244Z">
+<meta property="og:updated_time" content="2018-08-13T09:16:45.007Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态规划">
-<meta name="twitter:description" content="核心概念 阶段$k$ 状态变量$x_k$（状态集合） 决策变量$u_k$（决策集合$D_k(x_k)$，状态转移方程$x_{k+1}=T(x_k,u_k)$可以看成是理所应当的，是$u_k$作为决策变量的必要条件） 最优指标函数$f_k(x_k)$（指标函数$V_{k,n}$：当前状态变量、现阶段子策略(=决策变量+下阶段最优子策略) 的函数；阶段指标$v_k(x_k,u_k)$；策略$p_{k,">
-<meta name="twitter:image" content="http://p1nwamyah.bkt.clouddn.com/18-1-15/72271754.jpg">
+<meta name="twitter:title" content="为什么验证集和测试集要分开？">
+<meta name="twitter:description" content="以下是 stackexchange.com 上的一个问题以及回答。最后记录自己的思考和总结。 What is the difference between test set and validation set?I found this confusing when I use the neural network toolbox in Matlab.It divided the raw data">
 
 
 
@@ -141,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://godsing.top/2018/01/19/动态规划/"/>
+  <link rel="canonical" href="http://godsing.top/2018/08/13/为什么验证集和测试集要分开？/"/>
 
 
 
 
 
-  <title>动态规划 | Godsing's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>为什么验证集和测试集要分开？ | Godsing's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -284,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://godsing.top/2018/01/19/动态规划/">
+    <link itemprop="mainEntityOfPage" href="http://godsing.top/2018/08/13/为什么验证集和测试集要分开？/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Godsing">
@@ -301,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">动态规划</h1>
+          <h1 class="post-title" itemprop="name headline">为什么验证集和测试集要分开？</h1>
         
 
         <div class="post-meta">
@@ -313,8 +311,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T11:25:06+08:00">
-                2018-01-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-13T00:00:00+08:00">
+                2018-08-13
               </time>
             
 
@@ -329,8 +327,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-04-15T13:56:53+08:00">
-                2018-04-15
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T17:16:45+08:00">
+                2018-08-13
               </time>
             
           </span>
@@ -344,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/19/动态规划/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/01/19/动态规划/" itemprop="commentCount"></span>
+                <a href="/2018/08/13/为什么验证集和测试集要分开？/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/08/13/为什么验证集和测试集要分开？/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -353,7 +351,7 @@
 
           
           
-             <span id="/2018/01/19/动态规划/" class="leancloud_visitors" data-flag-title="动态规划">
+             <span id="/2018/08/13/为什么验证集和测试集要分开？/" class="leancloud_visitors" data-flag-title="为什么验证集和测试集要分开？">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -378,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  225 字
+                  1,648 字
                 </span>
               
 
@@ -394,7 +392,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -415,20 +413,66 @@
       
 
       
-        <h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><ul>
-<li>阶段$k$</li>
-<li>状态变量$x_k$（状态集合）</li>
-<li>决策变量$u_k$（决策集合$D_k(x_k)$，状态转移方程$x_{k+1}=T(x_k,u_k)$可以看成是理所应当的，是$u_k$作为决策变量的必要条件）</li>
-<li>最优指标函数$f_k(x_k)$（指标函数$V_{k,n}$：当前状态变量、现阶段子策略(=决策变量+下阶段最优子策略) 的函数；阶段指标$v_k(x_k,u_k)$；策略$p_{k,n}$=决策序列；后部子过程）</li>
-</ul>
-<a id="more"></a>
-<p><img src="http://p1nwamyah.bkt.clouddn.com/18-1-15/72271754.jpg" alt=""></p>
-<h3 id="动态规划的核心"><a href="#动态规划的核心" class="headerlink" title="动态规划的核心"></a>动态规划的核心</h3><p>看待某类问题的角度——状态的定义以及转移方程的定义：</p>
+        <p>以下是 stackexchange.com 上的一个问题以及回答。最后记录自己的思考和总结。</p>
+<h2 id="What-is-the-difference-between-test-set-and-validation-set"><a href="#What-is-the-difference-between-test-set-and-validation-set" class="headerlink" title="What is the difference between test set and validation set?"></a><a href="https://stats.stackexchange.com/questions/19048/what-is-the-difference-between-test-set-and-validation-set" target="_blank" rel="noopener">What is the difference between test set and validation set?</a></h2><p>I found this confusing when I use the neural network toolbox in Matlab.<br>It divided the raw data set into three parts:</p>
 <ol>
-<li>拆成若干个阶段/步骤</li>
-<li>每个阶段定义一个状态变量（或者直接定义最优指标函数）</li>
-<li>（定义角色变量并进一步）得到状态转移方程（或者直接得到最优指标函数转移方程）</li>
+<li>training set</li>
+<li>validation set</li>
+<li>test set</li>
 </ol>
+<p>I notice in many training or learning algorithm, the data is often divided into 2 parts, the training set and the test set.</p>
+<p>My questions are:</p>
+<ol>
+<li>what is the difference between validation set and test set?</li>
+<li>Is the validation set really specific to neural network? Or it is optional.</li>
+<li>To go further, is there a difference between validation and testing in context of machine learning?</li>
+</ol>
+<hr>
+<h3 id="Answer1："><a href="#Answer1：" class="headerlink" title="Answer1："></a>Answer1：</h3><p>Normally to perform supervised learning you need two types of data sets:</p>
+<ol>
+<li>In one dataset (your “gold standard”) you have the input data together with correct/expected output, This dataset is usually duly prepared either by humans or by collecting some data in semi-automated way. But it is important that you have the expected output for every data row here, because you need this for supervised learning.</li>
+<li>The data you are going to apply your model to. In many cases this is the data in which you are interested for the output of your model and thus you don’t have any “expected” output here yet.</li>
+</ol>
+<p>While performing machine learning you do the following:</p>
+<ol>
+<li>Training phase: you present your data from your “gold standard” and train your model, by pairing the input with expected output.</li>
+<li>Validation/Test phase: in order to estimate how well your model has been trained (that is dependent upon the size of your data, the value you would like to predict, input etc) and to estimate model properties (mean error for numeric predictors, classification errors for classifiers, recall and precision for IR-models etc.)</li>
+<li>Application phase: now you apply your freshly-developed model to the real-world data and get the results. Since you normally don’t have any reference value in this type of data (otherwise, why would you need your model?), you can only speculate about the quality of your model output using the results of your validation phase.</li>
+</ol>
+<p><em>The validation phase is often split into two parts</em>:</p>
+<ol>
+<li>In the first part you just look at your models and select the best performing approach using the validation data (=validation)</li>
+<li>Then you estimate the accuracy of the selected approach (=test).</li>
+</ol>
+<p>Hence the separation to 50/25/25.</p>
+<p>In case if you don’t need to choose an appropriate model from several rivaling approaches, you can just re-partition your set that you basically have only training set and test set, without performing the validation of your trained model. I personally partition them 70/30 then.</p>
+<p>See also <a href="https://stats.stackexchange.com/questions/9357/why-only-three-partitions-training-validation-test" target="_blank" rel="noopener">this question</a>.</p>
+<blockquote>
+<p><a href="https://stats.stackexchange.com/questions/9357/why-only-three-partitions-training-validation-test" target="_blank" rel="noopener">Why only three partitions? (training, validation, test)</a></p>
+<p>When you are trying to fit models to a large dataset, the common advice is to partition the data into three parts: the training, validation, and test dataset.</p>
+<p>This is because <strong>the models usually have three “levels” of parameters</strong>: the first “parameter” is the <strong>model class</strong> (e.g. SVM, neural network, random forest), the second set of parameters are the <strong>“regularization” parameters or “hyperparameters”</strong> (e.g. lasso penalty coefficient, choice of kernel, neural network structure) and the third set are what are usually considered the “<strong>parameters</strong>“ (e.g. coefficients for the covariates.)</p>
+<p><strong>Answer:</strong> (most voted)</p>
+<p>First, I think you’re mistaken about what the three partitions do. You don’t make any <strong>choices</strong> based on the <strong>test</strong> data. Your algorithms <strong>adjust their parameters</strong> based on the training data. You then run them on the <strong>validation</strong> data to <strong>compare</strong> your algorithms (and their trained parameters) and decide on a <strong>winner</strong>. You then run the winner on your test data to give you a <strong>forecast</strong> of how well it will do in the <strong>real world</strong>.</p>
+<p>You don’t validate on the training data because that would overfit your models. <strong>You don’t stop at the validation step’s winner’s score because you’ve iteratively been adjusting things to get a winner in the validation step, and so you need an independent test</strong> (that you haven’t specifically been adjusting towards) to give you an idea of how well you’ll do outside of the current arena.</p>
+<p>Second, I would think that one limiting factor here is how much data you have. Most of the time, we don’t even want to split the data into fixed partitions at all, hence CV.</p>
+</blockquote>
+<h3 id="Answer2"><a href="#Answer2" class="headerlink" title="Answer2:"></a>Answer2:</h3><p><strong>Training set:</strong> a set of examples used for learning: to fit the parameters of the classifier. In the MLP case, we would use the training set to find the “optimal” weights with the back-prop rule</p>
+<p><strong>Validation set:</strong> a set of examples used to tune the parameters of a classifier. In the MLP case, we would use the validation set to find the “optimal” number of hidden units or determine a stopping point for the back-propagation algorithm</p>
+<p><strong>Test set:</strong> a set of examples used only to assess the performance of a fully-trained classifier. In the MLP case, we would use the test to estimate the error rate after we have chosen the final model (MLP size and actual weights). After assessing the final model on the test set, YOU MUST NOT tune the model any further!</p>
+<p><strong>Why separate test and validation sets?</strong> </p>
+<p><strong>The error rate estimate of the final model on validation data will be biased (smaller than the true error rate) since the validation set is iteratively used to select the final model. After assessing the final model on the test set, YOU MUST NOT tune the model any further!</strong></p>
+<p><em>source : Introduction to Pattern Analysis,Ricardo Gutierrez-OsunaTexas A&amp;M University, Texas A&amp;M University</em></p>
+<h2 id="我的思考总结："><a href="#我的思考总结：" class="headerlink" title="我的思考总结："></a>我的思考总结：</h2><ol>
+<li>（已经确定好模型和超参数的情况下）训练集用于学习模型中具体的参数；</li>
+<li>验证集用于从多个模型中<strong>选择</strong>一个最佳的；(不同类型的模型、不同的超参数，都算是不同的模型)</li>
+<li>测试集用于预测这个模型在<strong>实际</strong>中表现如何，一般<strong>只在最后的模型上</strong>进行，且<strong>不再</strong>根据测试结果来调整模型。</li>
+</ol>
+<p>当我们需要训练一个模型时，比如说文本分类。很显然，我们需要一个训练集用来训练，通过梯度下降和反向传播等方法来更新我们模型的参数。</p>
+<p>模型训练好了之后，怎么知道我们模型效果怎样呢？显然需要另一个数据集来验证、或者说测试。就先叫做验证集吧！我们用验证集来评估模型的效果。</p>
+<p>假如评估发现效果不是很理想，我们希望再提高一些，因此我们可能会调整超参数（比如增加模型层数）、甚至是换模型类型（从TextCNN换成TextRNN），调整完之后在训练集上继续训练，如此循环往复。</p>
+<p>直到最后，不管什么原因（没时间了、觉得很难再提升了、或者觉得效果满意了等等），我们不想继续调整模型和训练了。这时候，我们有一个在验证集上表现最佳的模型，想看看它在现实中表现如何怎么办？总不能直接上线作为产品拿去给用户使用吧，总得先测试一下吧？因此，很显然我们需要一个数据集来测试一下验证集选出来的模型实际上是不是个辣鸡。就称该数据集为测试集吧！</p>
+<p>那为什么不是验证集选择出模型就可以了呢？因为我们通过不断迭代的调整（模型类型、超参数）使其在验证集上表现越来越好（虽然不像训练集直接参与具体参数的训练，但验证集参与了超参数和模型类型的选择，从而间接地会影响到最后模型的偏好），这可能导致最终选择出来的模型对验证集有种潜在的偏好（如：验证集误差率偏低），因此需要通过一个相对独立的测试集来预测该模型在现实世界中的表现。</p>
+<p>如果不需要选择模型，那么验证集就可以不需要。</p>
 
       
     </div>
@@ -446,9 +490,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
-          
-            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
           
         </div>
       
@@ -461,15 +503,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/08/06/【中文分词】常见工具及算法/" rel="next" title="【中文分词】常见工具及算法">
+                <i class="fa fa-chevron-left"></i> 【中文分词】常见工具及算法
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/21/中文字符集编码GB2312、GBK(CP936)、GB18030/" rel="prev" title="中文字符集编码GB2312、GBK(CP936)、GB18030">
-                中文字符集编码GB2312、GBK(CP936)、GB18030 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -627,7 +669,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心概念"><span class="nav-number">1.</span> <span class="nav-text">核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划的核心"><span class="nav-number">2.</span> <span class="nav-text">动态规划的核心</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-the-difference-between-test-set-and-validation-set"><span class="nav-number">1.</span> <span class="nav-text">What is the difference between test set and validation set?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Answer1："><span class="nav-number">1.1.</span> <span class="nav-text">Answer1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Answer2"><span class="nav-number">1.2.</span> <span class="nav-text">Answer2:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的思考总结："><span class="nav-number">2.</span> <span class="nav-text">我的思考总结：</span></a></li></ol></div>
             
 
           </div>
@@ -956,26 +998,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
