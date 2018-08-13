@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T17:16:45+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-08-13T17:21:51+08:00">
                 2018-08-13
               </time>
             
@@ -415,69 +415,20 @@
 
       
         
-          
-            <p>以下是 stackexchange.com 上的一个问题以及回答。最后记录自己的思考和总结。</p>
+          <p>以下是 stackexchange.com 上的一个问题以及回答。最后记录自己的思考和总结。</p>
 <h2 id="What-is-the-difference-between-test-set-and-validation-set"><a href="#What-is-the-difference-between-test-set-and-validation-set" class="headerlink" title="What is the difference between test set and validation set?"></a><a href="https://stats.stackexchange.com/questions/19048/what-is-the-difference-between-test-set-and-validation-set" target="_blank" rel="noopener">What is the difference between test set and validation set?</a></h2><p>I found this confusing when I use the neural network toolbox in Matlab.<br>It divided the raw data set into three parts:</p>
 <ol>
 <li>training set</li>
 <li>validation set</li>
 <li>test set</li>
 </ol>
-<p>I notice in many training or learning algorithm, the data is often divided into 2 parts, the training set and the test set.</p>
-<p>My questions are:</p>
-<ol>
-<li>what is the difference between validation set and test set?</li>
-<li>Is the validation set really specific to neural network? Or it is optional.</li>
-<li>To go further, is there a difference between validation and testing in context of machine learning?</li>
-</ol>
-<hr>
-<h3 id="Answer1："><a href="#Answer1：" class="headerlink" title="Answer1："></a>Answer1：</h3><p>Normally to perform supervised learning you need two types of data sets:</p>
-<ol>
-<li>In one dataset (your “gold standard”) you have the input data together with correct/expected output, This dataset is usually duly prepared either by humans or by collecting some data in semi-automated way. But it is important that you have the expected output for every data row here, because you need this for supervised learning.</li>
-<li>The data you are going to apply your model to. In many cases this is the data in which you are interested for the output of your model and thus you don’t have any “expected” output here yet.</li>
-</ol>
-<p>While performing machine learning you do the following:</p>
-<ol>
-<li>Training phase: you present your data from your “gold standard” and train your model, by pairing the input with expected output.</li>
-<li>Validation/Test phase: in order to estimate how well your model has been trained (that is dependent upon the size of your data, the value you would like to predict, input etc) and to estimate model properties (mean error for numeric predictors, classification errors for classifiers, recall and precision for IR-models etc.)</li>
-<li>Application phase: now you apply your freshly-developed model to the real-world data and get the results. Since you normally don’t have any reference value in this type of data (otherwise, why would you need your model?), you can only speculate about the quality of your model output using the results of your validation phase.</li>
-</ol>
-<p><em>The validation phase is often split into two parts</em>:</p>
-<ol>
-<li>In the first part you just look at your models and select the best performing approach using the validation data (=validation)</li>
-<li>Then you estimate the accuracy of the selected approach (=test).</li>
-</ol>
-<p>Hence the separation to 50/25/25.</p>
-<p>In case if you don’t need to choose an appropriate model from several rivaling approaches, you can just re-partition your set that you basically have only training set and test set, without performing the validation of your trained model. I personally partition them 70/30 then.</p>
-<p>See also <a href="https://stats.stackexchange.com/questions/9357/why-only-three-partitions-training-validation-test" target="_blank" rel="noopener">this question</a>.</p>
-<blockquote>
-<p><a href="https://stats.stackexchange.com/questions/9357/why-only-three-partitions-training-validation-test" target="_blank" rel="noopener">Why only three partitions? (training, validation, test)</a></p>
-<p>When you are trying to fit models to a large dataset, the common advice is to partition the data into three parts: the training, validation, and test dataset.</p>
-<p>This is because <strong>the models usually have three “levels” of parameters</strong>: the first “parameter” is the <strong>model class</strong> (e.g. SVM, neural network, random forest), the second set of parameters are the <strong>“regularization” parameters or “hyperparameters”</strong> (e.g. lasso penalty coefficient, choice of kernel, neural network structure) and the third set are what are usually considered the “<strong>parameters</strong>“ (e.g. coefficients for the covariates.)</p>
-<p><strong>Answer:</strong> (most voted)</p>
-<p>First, I think you’re mistaken about what the three partitions do. You don’t make any <strong>choices</strong> based on the <strong>test</strong> data. Your algorithms <strong>adjust their parameters</strong> based on the training data. You then run them on the <strong>validation</strong> data to <strong>compare</strong> your algorithms (and their trained parameters) and decide on a <strong>winner</strong>. You then run the winner on your test data to give you a <strong>forecast</strong> of how well it will do in the <strong>real world</strong>.</p>
-<p>You don’t validate on the training data because that would overfit your models. <strong>You don’t stop at the validation step’s winner’s score because you’ve iteratively been adjusting things to get a winner in the validation step, and so you need an independent test</strong> (that you haven’t specifically been adjusting towards) to give you an idea of how well you’ll do outside of the current arena.</p>
-<p>Second, I would think that one limiting factor here is how much data you have. Most of the time, we don’t even want to split the data into fixed partitions at all, hence CV.</p>
-</blockquote>
-<h3 id="Answer2"><a href="#Answer2" class="headerlink" title="Answer2:"></a>Answer2:</h3><p><strong>Training set:</strong> a set of examples used for learning: to fit the parameters of the classifier. In the MLP case, we would use the training set to find the “optimal” weights with the back-prop rule</p>
-<p><strong>Validation set:</strong> a set of examples used to tune the parameters of a classifier. In the MLP case, we would use the validation set to find the “optimal” number of hidden units or determine a stopping point for the back-propagation algorithm</p>
-<p><strong>Test set:</strong> a set of examples used only to assess the performance of a fully-trained classifier. In the MLP case, we would use the test to estimate the error rate after we have chosen the final model (MLP size and actual weights). After assessing the final model on the test set, YOU MUST NOT tune the model any further!</p>
-<p><strong>Why separate test and validation sets?</strong> </p>
-<p><strong>The error rate estimate of the final model on validation data will be biased (smaller than the true error rate) since the validation set is iteratively used to select the final model. After assessing the final model on the test set, YOU MUST NOT tune the model any further!</strong></p>
-<p><em>source : Introduction to Pattern Analysis,Ricardo Gutierrez-OsunaTexas A&amp;M University, Texas A&amp;M University</em></p>
-<h2 id="我的思考总结："><a href="#我的思考总结：" class="headerlink" title="我的思考总结："></a>我的思考总结：</h2><ol>
-<li>（已经确定好模型和超参数的情况下）训练集用于学习模型中具体的参数；</li>
-<li>验证集用于从多个模型中<strong>选择</strong>一个最佳的；(不同类型的模型、不同的超参数，都算是不同的模型)</li>
-<li>测试集用于预测这个模型在<strong>实际</strong>中表现如何，一般<strong>只在最后的模型上</strong>进行，且<strong>不再</strong>根据测试结果来调整模型。</li>
-</ol>
-<p>当我们需要训练一个模型时，比如说文本分类。很显然，我们需要一个训练集用来训练，通过梯度下降和反向传播等方法来更新我们模型的参数。</p>
-<p>模型训练好了之后，怎么知道我们模型效果怎样呢？显然需要另一个数据集来验证、或者说测试。就先叫做验证集吧！我们用验证集来评估模型的效果。</p>
-<p>假如评估发现效果不是很理想，我们希望再提高一些，因此我们可能会调整超参数（比如增加模型层数）、甚至是换模型类型（从TextCNN换成TextRNN），调整完之后在训练集上继续训练，如此循环往复。</p>
-<p>直到最后，不管什么原因（没时间了、觉得很难再提升了、或者觉得效果满意了等等），我们不想继续调整模型和训练了。这时候，我们有一个在验证集上表现最佳的模型，想看看它在现实中表现如何怎么办？总不能直接上线作为产品拿去给用户使用吧，总得先测试一下吧？因此，很显然我们需要一个数据集来测试一下验证集选出来的模型实际上是不是个辣鸡。就称该数据集为测试集吧！</p>
-<p>那为什么不是验证集选择出模型就可以了呢？因为我们通过不断迭代的调整（模型类型、超参数）使其在验证集上表现越来越好（虽然不像训练集直接参与具体参数的训练，但验证集参与了超参数和模型类型的选择，从而间接地会影响到最后模型的偏好），这可能导致最终选择出来的模型对验证集有种潜在的偏好（如：验证集误差率偏低），因此需要通过一个相对独立的测试集来预测该模型在现实世界中的表现。</p>
-<p>如果不需要选择模型，那么验证集就可以不需要。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/13/为什么验证集和测试集要分开？/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
