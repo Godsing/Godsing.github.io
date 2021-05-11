@@ -106,16 +106,16 @@
 <meta property="og:site_name" content="Godsing&#39;s Blog">
 <meta property="og:description" content="前言本文算是一篇总结，把使用 shadowsocks无GUI客户端 的各种常见的代理方式梳理一遍，给有需要的人，避免走同样的弯路。以下是本文的预备条件：  Linux 系统（本文用的是 Ubuntu 16.04）  已有 shadowsocks 帐号。获取免费帐号/自行搭建shadowsocks服务端 可以参考：  寻找Shadowsocks账号/搭建Shadowsocks服务 『原创』Shado">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/63345407.jpg">
-<meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/18099298.jpg">
-<meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/84531209.jpg">
-<meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/53938885.jpg">
-<meta property="og:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/62362422.jpg">
-<meta property="og:updated_time" content="2018-08-07T07:42:02.390Z">
+<meta property="og:image" content="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/63345407.jpg">
+<meta property="og:image" content="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/18099298.jpg">
+<meta property="og:image" content="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/84531209.jpg">
+<meta property="og:image" content="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/53938885.jpg">
+<meta property="og:image" content="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/62362422.jpg">
+<meta property="og:updated_time" content="2021-05-11T05:35:06.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下shadowsocks各种代理方式总结">
 <meta name="twitter:description" content="前言本文算是一篇总结，把使用 shadowsocks无GUI客户端 的各种常见的代理方式梳理一遍，给有需要的人，避免走同样的弯路。以下是本文的预备条件：  Linux 系统（本文用的是 Ubuntu 16.04）  已有 shadowsocks 帐号。获取免费帐号/自行搭建shadowsocks服务端 可以参考：  寻找Shadowsocks账号/搭建Shadowsocks服务 『原创』Shado">
-<meta name="twitter:image" content="http://p1nwamyah.bkt.clouddn.com/18-4-13/63345407.jpg">
+<meta name="twitter:image" content="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/63345407.jpg">
 
 
 
@@ -186,7 +186,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">探索ing</p>
+        <p class="site-subtitle">Always growing</p>
       
   </div>
 
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-07T15:42:02+08:00">
-                2018-08-07
+              <time title="更新于" itemprop="dateModified" datetime="2021-05-11T13:35:06+08:00">
+                2021-05-11
               </time>
             
           </span>
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,618 字
+                  3,635 字
                 </span>
               
 
@@ -528,7 +528,7 @@
 <p>小知识：如果发现粘贴不了，那是因为只有vim.gtk或vim.gnome才能使用系统全局粘贴板，默认的vim.basic看不到<code>+</code>号寄存器。安装vim.gnome使用<code>apt-get install vim-gnome</code>，然后vim自动会链接到vim.gnome。</p>
 </blockquote>
 <p>配置生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> /etc/systemd/system/shadowsocks.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> /etc/systemd/system/shadowsocks.service</span><br></pre></td></tr></table></figure>
 <p>输入管理员密码就可以了。</p>
 <p>现在你可以马上重启试试，或先在后台启动，等下次重启再看看！</p>
 <hr>
@@ -543,11 +543,11 @@
 <li>下面的 Bypass List 填上不需要走代理的地址，比如：<code>shadowsocks.json</code>配置中的<code>local_address</code>应该填进去。</li>
 <li>好了，点击左边绿色的<code>Apply changes</code>保存。</li>
 </ul>
-<p><img src="http://p1nwamyah.bkt.clouddn.com/18-4-13/63345407.jpg" alt=""></p>
+<p><img src="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/63345407.jpg" alt=""></p>
 <h3 id="配置-Switch-Profile"><a href="#配置-Switch-Profile" class="headerlink" title="配置 Switch Profile"></a>配置 Switch Profile</h3><p>同样点击左下角的 “+New profile…” ，在弹出的窗口中选择“Switch Profile”，名字随便起，创建完成后如图：</p>
-<p><img src="http://p1nwamyah.bkt.clouddn.com/18-4-13/18099298.jpg" alt="img"></p>
+<p><img src="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/18099298.jpg" alt="img"></p>
 <p>先点击“+Add a rule list”，然后开始配置：</p>
-<p><img src="http://p1nwamyah.bkt.clouddn.com/18-4-13/84531209.jpg" alt=""></p>
+<p><img src="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/84531209.jpg" alt=""></p>
 <ul>
 <li><p>勾上<code>Rule list rules</code>，右边的<code>Profile</code>列在下拉框中选择刚才创建的<code>ss</code></p>
 </li>
@@ -566,9 +566,9 @@
 <h3 id="启用-SwitchyOmega"><a href="#启用-SwitchyOmega" class="headerlink" title="启用 SwitchyOmega"></a>启用 SwitchyOmega</h3><p>启用 SwitchyOmega 插件，选择 Auto Switch 模式就可以了。</p>
 <h2 id="系统代理"><a href="#系统代理" class="headerlink" title="系统代理"></a>系统代理</h2><p>如有你有系统全局代理的需要，那么就往下看，否则只需要参考上文的 <a href="#浏览器代理">浏览器代理</a> 即可。</p>
 <p>找到“网络”配置项：</p>
-<p><img src="http://p1nwamyah.bkt.clouddn.com/18-4-13/53938885.jpg" alt=""></p>
+<p><img src="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/53938885.jpg" alt=""></p>
 <p>设置成如下：</p>
-<p><img src="http://p1nwamyah.bkt.clouddn.com/18-4-13/62362422.jpg" alt=""></p>
+<p><img src="https://mdpicbed.oss-cn-hongkong.aliyuncs.com/imgs/62362422.jpg" alt=""></p>
 <p>设置完成点击”Apply system wide”，需要输入验证权限，输入密码即可，这里开启的默认版本是socks5。</p>
 <p>Tips: 如果要关闭系统代理，上图中的那个 Method 选择 “None”，然后同样点击”Apply system wide”即可。</p>
 <p>系统代理是全局走代理的，访问国内网站就不太方便了，相当于绕了个弯，速度变慢，甚至是访问反而受限了，如无必要，还是推荐浏览器方式按规则选择性代理。</p>
@@ -617,8 +617,8 @@
 <h2 id="其他代理-pip-git"><a href="#其他代理-pip-git" class="headerlink" title="其他代理(pip|git)"></a>其他代理(pip|git)</h2><h3 id="git-使用代理"><a href="#git-使用代理" class="headerlink" title="git 使用代理"></a>git 使用代理</h3><p>刚才的一大堆设置对git命令没有作用，为此我们要单独设置。</p>
 <p>事实上在git命令最后加参数可以实现代理：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--config http.proxy=localhost:8123</span><br></pre></td></tr></table></figure>
-<p>但我们仍然觉得不方便，还是起个别名吧，比如就叫“gp”。</p>
-<p>在.bashrc文件末尾加入这一句：</p>
+<p>但我们仍然觉得不方便，还是起个别名吧，比如就叫”gp”(git proxy 的意思)。</p>
+<p>在.bashrc (或 .zshrc, 如果你用的是 zsh 的话) 文件末尾加入这一句：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gp=<span class="string">" --config http.proxy=localhost:8123"</span></span><br></pre></td></tr></table></figure>
 <p>执行<code>source ~/.bashrc</code></p>
 <p>以后，在git clone命令后面加入<code>$gp</code>就可以加快克隆速度，比如：</p>
@@ -772,7 +772,7 @@
                 alt="Godsing" />
             
               <p class="site-author-name" itemprop="name">Godsing</p>
-              <p class="site-description motion-element" itemprop="description">钥匙不在锁孔里</p>
+              <p class="site-description motion-element" itemprop="description">Permission to be human.</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -881,7 +881,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
